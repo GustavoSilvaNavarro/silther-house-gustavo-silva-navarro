@@ -1,25 +1,15 @@
-import logo from './logo.svg';
+//IMPORT APP STYLES
 import './App.css';
 
+//FUNCTIONS AND METTHODS
 function App() {
+  //RENDER APP TO FRONTEND
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome to Silther House</h1>
     </div>
   );
 }
 
+//EXPORTING APP COMPONENT
 export default App;

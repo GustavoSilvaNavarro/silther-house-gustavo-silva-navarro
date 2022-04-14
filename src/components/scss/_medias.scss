@@ -1,0 +1,105 @@
+//MEDIAS QUERYS INDEX
+@media (max-width: 1200px) {
+    //NAVBAR
+    .headerSearch__input {
+        width: 350px;
+    }
+}
+
+@media (max-width: 1085px) {
+    //NAVBAR
+    .headerSearch__input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 910px) {
+    //NAVBAR
+    .linksMenu__burgerMenu {
+        display: map-get($modelado, bloque);
+        padding: 0.2rem 0.6rem;
+
+        &:hover {
+            @include backBorderStyle(25px, rgba(255, 255, 255, 0.2));
+            border: 1px solid white;
+        }
+    }
+
+    .navBar__linksMenu {
+        ul {
+            position: absolute;
+            width: 100%;
+            background-color: #57606f;
+            top: 121.23px;
+            left: -100%;
+            justify-content: map-get($modelado, centro);
+            align-items: map-get($modelado, centro);
+            padding: 1rem 0;
+            z-index: 3;
+            transition: all 0.5s;
+        }
+    }
+
+    #burgerMenu__checkBtn:checked ~ ul {
+        left: 0;
+    }
+
+    .navBar__linksMenu li a:hover {
+        @include backBorderStyle(0px, transparent);
+        border: map-get($modelado, ninguno);
+        color: $dark-color-navbar;
+    }
+
+    .headerSearch__input {
+        width: 400px;
+    }
+}
+
+@media (max-width: 740px) {
+    //NAVBAR
+    .headerSearch__input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 540px) {
+    //NAVBAR
+    .headHeader__middle {
+        display: map-get($modelado, ninguno);
+    }
+
+    .navBar__linksMenu {
+        ul {
+            flex-direction: column;
+        }
+
+        li {
+            padding: 1rem 0;
+            a {
+                font-size: $size * 1.3;
+            }
+        }
+    }
+
+    .gridContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    //NAVBAR
+    .headerNavBar__logo {
+        width: 110px;
+    }
+
+    .linksMenu__burgerMenu {
+        font-size: $size * 2;
+        padding: 0.2rem 1rem;
+    }
+
+    .navBar__linksMenu {
+        ul {
+            top: 93.34px;
+        }
+    }
+}

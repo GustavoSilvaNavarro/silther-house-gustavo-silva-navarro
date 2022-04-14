@@ -1,17 +1,17 @@
 //CALL MODULES
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
-//IMPORT STYLES
-import './index.css';
+//IMPORTING STYLES
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
 
 //IMPORT COMPONENTS
 import App from './App';
 
-//REACT APP
-ReactDOM.render(
+//REACT APP -- NUEVA VERSION 18
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
-);
+)

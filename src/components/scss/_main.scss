@@ -1,0 +1,31 @@
+.addCartProducts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartProducts__container {
+    width: 310px;
+}
+
+.productCounterContainer {
+    background-color: #dfe6e9;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    span {
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+    }
+    .counterContainer__numberOrdered {
+        font-size: 30px;
+        font-weight: 600;
+        border-right: 2px solid rgba(0, 0, 0, 0.2);
+        border-left: 2px solid rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+    }
+}

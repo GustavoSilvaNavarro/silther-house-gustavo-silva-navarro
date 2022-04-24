@@ -15,6 +15,8 @@ export const ItemCount = ({ stockProduct, initial, onAdd }) => {
             let numberAdded = newNumber+1;
             setStockAvailable(stockAvailable-1);
             setCountProduct((numberAdded < 10) ? '0'+numberAdded.toString() : numberAdded.toString());
+
+            onAdd(numberAdded);
         } else {
             console.log('Stock no disponible');
         }
@@ -31,13 +33,11 @@ export const ItemCount = ({ stockProduct, initial, onAdd }) => {
         };
     };
 
-    onAdd();
-
     //RENDERING COMPONENT
     return (
         <div className='addCartProducts'>
             <div className="cartProducts__container">
-                <p>Stock producto: {(stockAvailable != 0) ? stockAvailable : 'Fuera de stock'}</p>
+                <p>Stock producto: {(stockAvailable !== 0) ? stockAvailable : 'Fuera de stock'}</p>
                 <div className='productCounterContainer mb-5'>
                     <span onClick={removeOneProduct}><Remove sx={{ fontSize: 30 }} /></span>
                     <span className='counterContainer__numberOrdered'>{countProduct}</span>

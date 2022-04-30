@@ -1,3 +1,6 @@
+//CALL MODULES
+import { Link } from 'react-router-dom';
+
 //IMPORTING COMPONENTS
 import { CartWidget } from './CartWidget';
 
@@ -9,9 +12,9 @@ export const NavBar = () => {
             {/* NAVBAR */}
             <div className="travelHeader__navBar">
                 <nav className="headerNavBar__design">
-                    <a href="#" className="headerNavBar__link">
+                    <Link to='/' className="headerNavBar__link">
                         <img className="headerNavBar__logo img-fluid" src="https://res.cloudinary.com/dukuzakaw/image/upload/v1646938165/SkyLimitAirlinesWebSite/logo/travelLogo_irlvue.webp" alt="Travel Logo" />
-                    </a>
+                    </Link>
 
                     <div className="headHeader__middle">
                         <div className="headHeader__search">
@@ -27,11 +30,11 @@ export const NavBar = () => {
                         </label>
         
                         <ul>
-                            <li className="linksMenu__disappear"><a href="#">Home</a></li>
+                            <li className="linksMenu__disappear"><Link to='/'>Home</Link></li>
                             <li className="linksMenu__disappear"><a href="#">My Orders</a></li>
-                            <li className="linksMenu__disappear"><a href="#">Deals</a></li>
-                            <li className="linksMenu__disappear"><a href="#">SIGN IN</a></li>
-                            <li className="linksMenu__disappear"><a href="#">SIGN UP</a></li>
+                            <li className="linksMenu__disappear"><Link to="/category/lunch">Lunch</Link></li>
+                            <li className="linksMenu__disappear"><Link to="/category/dinner">Dinner</Link></li>
+                            <li className="linksMenu__disappear"><Link to="/category/beverages">Beverages</Link></li>
                             <CartWidget />
                         </ul>
                     </div>

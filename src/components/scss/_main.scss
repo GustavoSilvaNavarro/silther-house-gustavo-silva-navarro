@@ -6,7 +6,7 @@
 }
 
 .cartProducts__container {
-    width: 310px;
+    width: 250px;
 }
 
 .productCounterContainer {
@@ -28,4 +28,8 @@
         border-left: 2px solid rgba(0, 0, 0, 0.2);
         pointer-events: none;
     }
+}
+
+.imageDetails {
+    width: 100%;
 }

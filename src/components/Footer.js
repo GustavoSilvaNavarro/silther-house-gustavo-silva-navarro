@@ -1,3 +1,6 @@
+//CALL MODULES
+import { Link } from "react-router-dom";
+
 //FUNCTIONS AND METHODS
 export const Footer = () => {
     //RENDERING COMPONENT
@@ -18,7 +21,7 @@ export const Footer = () => {
                         <h5 className="text-white mb-5">Silther House</h5>
                         <ul className="list-unstyled">
                             <li className="mb-2">
-                                <a href="#" className="text-white text-decoration-none">Home</a>
+                                <Link to='/' className="text-white text-decoration-none">Home</Link>
                             </li>
                             <li className="mb-2">
                                 <a href="#" className="text-white text-decoration-none">SIGN IN</a>

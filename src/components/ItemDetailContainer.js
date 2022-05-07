@@ -11,8 +11,8 @@ import { allProducts } from './utils/productsDB';
 //EXPORTING COMPONENTS
 export const ItemDetailContainer = () => {
     //STATE
+    const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [product, setProduct] = useState({});
 
     //Get Data
     const { id } = useParams();
@@ -23,8 +23,7 @@ export const ItemDetailContainer = () => {
         const getData = () => {
             return new Promise(res => {
                 setTimeout(() => {
-                    const item = allProducts.find(products => products.id == id);
-                    res(item);
+                    id && res(allProducts.filter(products => products.id === id));
                 }, 2000);
             });
         };
@@ -32,15 +31,15 @@ export const ItemDetailContainer = () => {
         const reqData = async () => {
             try {
                 const data = await getData();
-                setProduct(data);
+                setProduct(data[0]);
                 setLoading(false);
             } catch(e) {
                 console.log(e);
-            }
+            };
         };
 
         reqData();
-    }, []);
+    }, [id]);
 
     //RENDERING COMPONENT
     return (
@@ -50,7 +49,7 @@ export const ItemDetailContainer = () => {
                     <h5 className='text-center'>Loading...</h5>
                 </div>
             ) : (
-                <ItemDetail itemProduct={product} />
+                <ItemDetail itemProduct={product[0]} />
             ) }
         </section>
     )

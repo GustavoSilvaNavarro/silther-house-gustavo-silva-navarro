@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { Remove, Add } from '@mui/icons-material';
 
 //FUNCTIONS AND METHODS
-export const ItemCount = ({ stockProduct, initial, onAdd }) => {
+export const ItemCount = ({ stockProduct, initial, onAdd, updateStock }) => {
     //STATES
     const [stockAvailable, setStockAvailable] = useState(stockProduct);
     const [countProduct, setCountProduct] = useState(initial);
+    const [cantidadPedida, setCantidadPedida] = useState(0);
 
     //FUNCTIONS
     const addOneProduct = () => {
@@ -15,19 +16,23 @@ export const ItemCount = ({ stockProduct, initial, onAdd }) => {
             let numberAdded = newNumber+1;
             setStockAvailable(stockAvailable-1);
             setCountProduct((numberAdded < 10) ? '0'+numberAdded.toString() : numberAdded.toString());
+            setCantidadPedida(numberAdded);
 
-            onAdd(numberAdded);
+            updateStock(stockAvailable-1);
         } else {
             console.log('Stock no disponible');
         }
     };
-
+//onAdd(numberAdded);
     const removeOneProduct = () => {
         if(parseInt(countProduct) > 0) {
             let newNumber = parseInt(countProduct);
             let numberAdded = newNumber-1;
             setStockAvailable(stockAvailable+1);
             setCountProduct((numberAdded < 10) ? '0'+numberAdded.toString() : numberAdded.toString());
+            setCantidadPedida(numberAdded);
+
+            updateStock(stockAvailable+1);
         } else {
             console.log('No puede agregar valores negativos');
         };
@@ -37,14 +42,13 @@ export const ItemCount = ({ stockProduct, initial, onAdd }) => {
     return (
         <div className='addCartProducts'>
             <div className="cartProducts__container">
-                <p>Stock producto: {(stockAvailable !== 0) ? stockAvailable : 'Fuera de stock'}</p>
                 <div className='productCounterContainer mb-5'>
                     <span onClick={removeOneProduct}><Remove sx={{ fontSize: 30 }} /></span>
                     <span className='counterContainer__numberOrdered'>{countProduct}</span>
                     <span onClick={addOneProduct}><Add sx={{ fontSize: 30 }} /></span>
                 </div>
                 <div className='d-grid mb-3'>
-                    <button type='button' className='btn btn-outline-info'>Add Cart</button>
+                    <button type='button' onClick={() => onAdd(cantidadPedida, true)} className='btn btn-outline-info'>Add</button>
                 </div>
             </div>
         </div>

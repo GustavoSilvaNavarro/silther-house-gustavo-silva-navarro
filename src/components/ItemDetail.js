@@ -10,7 +10,7 @@ import { ItemCount } from './ItemCount';
 //EXPORTING COMPONNET
 export const ItemDetail = ({ itemProduct }) => {
     //STATES
-    const [contadorStock, setContadorStock] = useState(itemProduct.stock);
+    const [contadorStock, setContadorStock] = useState(itemProduct?.stock);
     const [dissapear, setDissapear] = useState(false);
     const [cantidadPedido, setCantidadPedido] = useState(0);
     const [valorInitial, setValorInitial] = useState('00');
@@ -46,7 +46,7 @@ export const ItemDetail = ({ itemProduct }) => {
             <Box className='mb-3 mt-2'>
                 <Grid container spacing={2}>
                     <Grid textAlign='center' item xs={12} sm={6} md={6} lg={6}>
-                        <img className='imageDetails' src={itemProduct?.url} alt={itemProduct.name} loading='lazy' />
+                        <img className='imageDetails' src={itemProduct.url} alt={itemProduct.name} loading='lazy' />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6} lg={6}>
                         <Typography variant='h4'>{itemProduct.description}</Typography>

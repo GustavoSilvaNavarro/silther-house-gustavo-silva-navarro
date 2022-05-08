@@ -31,7 +31,7 @@ export const ItemDetailContainer = () => {
         const reqData = async () => {
             try {
                 const data = await getData();
-                setProduct(data[0]);
+                setProduct(data);
                 setLoading(false);
             } catch(e) {
                 console.log(e);

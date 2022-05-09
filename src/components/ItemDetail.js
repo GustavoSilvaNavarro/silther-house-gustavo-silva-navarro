@@ -1,8 +1,10 @@
 //CALL MODULES
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Container, Typography, Box, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+//IMPORTING CONTEXT
+import { OrderContext } from './context/CartContext';
 
 //IMPORTING COMPONENTS
 import { ItemCount } from './ItemCount';
@@ -15,6 +17,9 @@ export const ItemDetail = ({ itemProduct }) => {
     const [cantidadPedido, setCantidadPedido] = useState(0);
     const [valorInitial, setValorInitial] = useState('00');
 
+    //USE CONTEXT - VALUES AND FUNCTIONS
+    const { addProducts } = useContext(OrderContext);
+
     //FUNCTIONS
     //Modify stocks
     const updateStock = (stockActualizado) => {
@@ -22,8 +27,10 @@ export const ItemDetail = ({ itemProduct }) => {
     };
 
     const onAdd = (numberAdded, ocultar) => {
-        setCantidadPedido(numberAdded);
-        setDissapear(ocultar);
+        if(numberAdded > 0) {
+            setCantidadPedido(numberAdded);
+            setDissapear(ocultar);
+        }
     };
 
     const restartOrder = () => {
@@ -60,7 +67,7 @@ export const ItemDetail = ({ itemProduct }) => {
                                 <div className='mt-5'>
                                     <div className="d-flex align-items-center justify-content-center">
                                         <button onClick={restartOrder} className='me-2 btn btn btn-outline-danger'>Cancelar</button>
-                                        <Link to='/cart' className='btn btn-outline-info'>Add Cart</Link>
+                                        <Link to='/cart'><button className='btn btn-outline-info' onClick={() => addProducts(itemProduct, cantidadPedido)}>Add Cart</button></Link>
                                         <button onClick={seguirComprando} className='ms-2 btn btn-outline-info'>Seguir Comprando</button>
                                     </div>
                                 </div> : <ItemCount stockProduct={contadorStock} initial={valorInitial} onAdd={onAdd} updateStock={updateStock} />

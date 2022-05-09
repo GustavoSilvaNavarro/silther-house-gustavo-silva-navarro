@@ -22,7 +22,7 @@ export const ItemListContainer = () => {
         const getData = () => {
             return new Promise(res => {
                 setTimeout(() => {
-                    (categoryProduct) ? res(allProducts.filter(product => product.category == categoryProduct)) : res(allProducts);
+                    (categoryProduct) ? res(allProducts.filter(product => product.category === categoryProduct)) : res(allProducts);
                 }, 2000);
             });
         };

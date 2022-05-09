@@ -1,5 +1,6 @@
 //CALL MODULES
 import { useState, useContext } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { Container, Typography, Box, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -30,6 +31,16 @@ export const ItemDetail = ({ itemProduct }) => {
         if(numberAdded > 0) {
             setCantidadPedido(numberAdded);
             setDissapear(ocultar);
+        } else {
+            toast.info('Enter an amount', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -76,6 +87,17 @@ export const ItemDetail = ({ itemProduct }) => {
                     </Grid>
                 </Grid>
             </Box>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Container>
     )
 };

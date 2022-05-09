@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 
 //IMPORTING STYLES
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
 
 //IMPORT COMPONENTS

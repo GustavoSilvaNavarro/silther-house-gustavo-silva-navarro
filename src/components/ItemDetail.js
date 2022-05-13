@@ -41,7 +41,7 @@ export const ItemDetail = ({ itemProduct }) => {
                 draggable: true,
                 progress: undefined,
             });
-        }
+        };
     };
 
     const restartOrder = () => {
@@ -67,7 +67,7 @@ export const ItemDetail = ({ itemProduct }) => {
                         <img className='imageDetails' src={itemProduct.url} alt={itemProduct.name} loading='lazy' />
                     </Grid>
                     <Grid item xs={12} sm={6} md={6} lg={6}>
-                        <Typography variant='h4'>{itemProduct.description}</Typography>
+                        <Typography variant='p'>{itemProduct.description}</Typography>
                         <Box className='d-flex flex-column'>
                             <Box className='d-flex align-items-center justify-content-around'>
                                 <p className='fs-4'>Stock: <span>{contadorStock}</span></p>
@@ -81,7 +81,7 @@ export const ItemDetail = ({ itemProduct }) => {
                                         <Link to='/cart'><button className='btn btn-outline-info' onClick={() => addProducts(itemProduct, cantidadPedido)}>Add Cart</button></Link>
                                         <button onClick={seguirComprando} className='ms-2 btn btn-outline-info'>Seguir Comprando</button>
                                     </div>
-                                </div> : <ItemCount stockProduct={contadorStock} initial={valorInitial} onAdd={onAdd} updateStock={updateStock} />
+                                </div> : <ItemCount ultimoPedido={cantidadPedido} stockProduct={contadorStock} initial={valorInitial} onAdd={onAdd} updateStock={updateStock} />
                             }
                         </Box>
                     </Grid>

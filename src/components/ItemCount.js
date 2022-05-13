@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Remove, Add } from '@mui/icons-material';
 
 //FUNCTIONS AND METHODS
-export const ItemCount = ({ stockProduct, initial, onAdd, updateStock }) => {
+export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateStock }) => {
     //STATES
     const [stockAvailable, setStockAvailable] = useState(stockProduct);
     const [countProduct, setCountProduct] = useState(initial);
-    const [cantidadPedida, setCantidadPedida] = useState(0);
+    const [cantidadPedida, setCantidadPedida] = useState(ultimoPedido);
 
     //FUNCTIONS
     const addOneProduct = () => {

@@ -5,8 +5,8 @@ export const allProducts = [
         category: "beverages",
         exist: true,
         url: 'https://res.cloudinary.com/dukuzakaw/image/upload/v1650761227/reactProjectCoder/eCommerceProducts/beer_ov0vbk.webp',
-        name: "New England IPA Beer",
-        description: "Harpoon IPA from Boston",
+        name: "New England's Original IPA",
+        description: "As enjoyable today as it was in '93, IPA is a regional favorite and a craft beer classic. Styled after an English IPA but brewed with distinctly American hops, it's citrusy, refreshing, and perfectly balanced- as perfect on a Cape Cod beach as it is in a VT ski lodge or Boston dive bar.",
         price: 7,
         stock: 10
     },
@@ -15,8 +15,8 @@ export const allProducts = [
         category: "lunch",
         exist: true,
         url: 'https://res.cloudinary.com/dukuzakaw/image/upload/v1650761231/reactProjectCoder/eCommerceProducts/pizza_onle8t.webp',
-        name: "Peperoni Pizza",
-        description: "Delicious Large Peperoni Italian Pizza",
+        name: "Buffalo Chicken Pizza",
+        description: "Slightly spicy chicken, tomatoes, diavolo sauce and smoked mozzarella, brick oven baked and finished with crumbled gorgonzola and chopped scallion.",
         price: 44,
         stock: 45
     },
@@ -25,8 +25,8 @@ export const allProducts = [
         category: "lunch",
         exist: true,
         url: 'https://res.cloudinary.com/dukuzakaw/image/upload/v1650761224/reactProjectCoder/eCommerceProducts/burger_mllkf5.webp',
-        name: "American Burger",
-        description: "Bacon Cheese Burger with Fries",
+        name: "Bacon Cheeseburger",
+        description: "Fresh patties hot off the grill with American-style cheese and crispy apple-wood smoked bacon. Placed on a soft, toasted sesame seed bun. Choose as many toppings as you want.",
         price: 15,
         stock: 10
     },
@@ -36,7 +36,7 @@ export const allProducts = [
         exist: true,
         url: 'https://res.cloudinary.com/dukuzakaw/image/upload/v1650761225/reactProjectCoder/eCommerceProducts/falafel_ysfcio.webp',
         name: "Falafel",
-        description: "Indian style falafel",
+        description: "Deep-fried ball or patty-shaped fritter made from ground chickpeas, broad beans, or both. Falafel is a traditional Middle Eastern food, commonly served in a pita, which acts as a pocket, or wrapped in a flatbread known as taboon; 'falafel' also frequently refers to a wrapped sandwich that is prepared in this way.",
         price: 13,
         stock: 18
     }

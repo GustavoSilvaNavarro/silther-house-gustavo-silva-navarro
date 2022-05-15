@@ -47,6 +47,25 @@ const CartContext = ({ children }) => {
     };
   };
 
+  //DELETE PRODUCT
+  const deleteProduct = id => {
+    const rest = initialState.orders.filter(product => product.id !== id);
+    let precioTot = 0;
+    let totCantidad = 0;
+    let ivaTot = 0;
+
+    for(let i = 0; i < rest.length; i++) {
+      precioTot += rest[i].amount * rest[i].price;
+      totCantidad += rest[i].amount
+      ivaTot += (rest[i].amount * rest[i].price)*0.21;
+    };
+
+    setOrdersCart(rest);
+    setTotalPrice(precioTot)
+    setTotalAmount(totCantidad)
+    setTotalIva(ivaTot)
+  };
+
   //Check the product is inside cart
   const isInCart = id => {
     const duplicados = initialState.orders.filter(item => item.id === id);
@@ -62,6 +81,7 @@ const CartContext = ({ children }) => {
     <OrderContext.Provider value={{
       initialState,
       addProducts,
+      deleteProduct,
       isInCart
     }}>
       {children}

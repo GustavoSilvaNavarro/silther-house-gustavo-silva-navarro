@@ -34,6 +34,113 @@
     width: 100%;
 }
 
+.cartContainer {
+    width: 100%;
+    padding: 0 15px;
+}
+
 .cartTitle {
     color: $dark-color-navbar;
+}
+
+.fullInfor__container {
+    display: flex !important;
+}
+
+.inFoContainer__img {
+    width: 25%;
+}
+
+.detailsContent__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.detailsWrapper__category {
+    text-transform: capitalize;
+}
+
+.detailsWrapper__stockAvailable {
+    color: green;
+}
+
+.detailsWrapper__stockNotAvailable {
+    color: red;
+}
+
+.infoContainer__subTotal {
+    border-top: 1px solid #b2bec3;
+    color: #b2bec3;
+}
+
+.finalPriceDetails {
+    display: flex;
+    align-items: center;
+    > i {
+        font-size: 25px;
+        background-color: $dark-color-navbar;
+        color: white;
+        padding: 15px;
+        border: 1px solid $dark-color-navbar;
+        border-radius: 50%;
+        margin-right: 14px;
+    }
+}
+
+.priceDetails__container {
+    > p {
+        margin: 0;
+    }
+}
+
+.priceContainer__final {
+    color: $dark-color-navbar;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.priceContainer__total {
+    color: $dark-color-navbar;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.priceContainer__taxes {
+    color: $light-color-textCard;
+    font-size: 12px;
+}
+
+.passangersNumber__paragraph {
+    color: $dark-color-navbar !important;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.subtotalContainer, .taxesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > p {
+        margin: 0;
+    }
+}
+
+.subtotalContainer__flights {
+    font-size: 14px;
+}
+
+.subtotalContainer__subt {
+    font-size: 17px;
+    color: $dark-color-navbar;
+    font-weight: 500;
+}
+
+.taxesContainer__taxDetail {
+    font-size: 14px;
+    color: $light-color-input;
+}
+
+.taxesContainer__taxMoney {
+    color: $light-color-textCard;
 }

@@ -71,3 +71,23 @@
 #burgerMenu__checkBtn {
     display: map-get($modelado, ninguno);
 }
+
+.cartIconContainer {
+    display: none;
+}
+
+.cartIconContainer__link {
+    position: relative;
+}
+
+.iconContainer__number {
+    margin: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    background: red;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 100%;
+}

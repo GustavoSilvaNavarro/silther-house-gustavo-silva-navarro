@@ -1,12 +1,13 @@
 //CALL MODULES
 import { useState, useEffect } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 
 //IMPORT COMPONENTS
 import { ItemList } from './ItemList';
 
 //Geting DB
-import { allProducts } from './utils/productsDB';
+import { db } from './firebase/firebase';
 
 //FUNCTIONS AND METHODS
 export const ItemListContainer = () => {
@@ -19,25 +20,34 @@ export const ItemListContainer = () => {
     //USEEFFECT SHOW DATA WHEN I LOAD (Piece of code wich runs based on a condition)
     //Getting data from DB
     useEffect(() => {
-        const getData = () => {
-            return new Promise(res => {
-                setTimeout(() => {
-                    (categoryProduct) ? res(allProducts.filter(product => product.category === categoryProduct)) : res(allProducts);
-                }, 2000);
-            });
-        };
-
-        const requestData = async () => {
+        const getProducts = async () => {
             try {
-                const data = await getData();
-                setListProducts(data);
-                setCargando(false);
-            } catch (err) {
-                console.log('Error en obtener la data, ', err);
-            };        
+                if(categoryProduct) {
+                    const req = query(collection(db, 'allProducts'), where('category', "==", categoryProduct));
+                    const datos = await getDocs(req);
+                    setListProducts(datos.docs.map(doc => (
+                        {
+                            id: doc.id,
+                            ...doc.data()
+                        }
+                    )));
+                } else {
+                    const dbData = await getDocs(collection(db, 'allProducts'));
+                    setListProducts(dbData.docs.map(doc => (
+                        {
+                            id: doc.id,
+                            ...doc.data()
+                        }
+                    )));
+                };
+
+                setCargando(false);    
+            } catch(err) {
+                console.log('Lo sentimos no pudimos obtener los datos', err);
+            };
         };
 
-        requestData();
+        getProducts();
     }, [categoryProduct]);
 
     //RENDERING COMPONENT

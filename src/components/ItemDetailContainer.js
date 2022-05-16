@@ -1,12 +1,13 @@
 //CALL MODULES
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { collection, getDocs, query, where, documentId } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 
 //IMPORTING COMPONENTS
 import { ItemDetail } from './ItemDetail';
 
-//DATA
-import { allProducts } from './utils/productsDB';
+//GET DATA
+import { db } from './firebase/firebase';
 
 //EXPORTING COMPONENTS
 export const ItemDetailContainer = () => {
@@ -20,25 +21,26 @@ export const ItemDetailContainer = () => {
     //USEEFFECT SHOW DATA WHEN I LOAD (Piece of code wich runs based on a condition)
     //Getting data from DB
     useEffect(() => {
-        const getData = () => {
-            return new Promise(res => {
-                setTimeout(() => {
-                    id && res(allProducts.filter(products => products.id === id));
-                }, 2000);
-            });
-        };
-
-        const reqData = async () => {
+        const getProductDetails = async () => {
             try {
-                const data = await getData();
-                setProduct(data);
+                const dbRef = collection(db, 'allProducts');
+
+                const consulta = query(dbRef, where(documentId(dbRef), "==", id));
+                const data = await getDocs(consulta);
+                setProduct(data.docs.map(doc => (
+                    {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                )));
+
                 setLoading(false);
-            } catch(e) {
-                console.log(e);
+            } catch(err) {
+                console.log('Error al consultar el dato', err);
             };
         };
 
-        reqData();
+        getProductDetails();
     }, [id]);
 
     //RENDERING COMPONENT

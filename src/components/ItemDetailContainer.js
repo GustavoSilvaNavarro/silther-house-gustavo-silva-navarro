@@ -1,6 +1,6 @@
 //CALL MODULES
 import { useEffect, useState } from 'react';
-import { collection, getDocs, query, where, documentId } from 'firebase/firestore';
+import { collection, getDoc, doc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 
 //IMPORTING COMPONENTS
@@ -12,7 +12,7 @@ import { db } from './firebase/firebase';
 //EXPORTING COMPONENTS
 export const ItemDetailContainer = () => {
     //STATE
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
 
     //Get Data
@@ -25,14 +25,14 @@ export const ItemDetailContainer = () => {
             try {
                 const dbRef = collection(db, 'allProducts');
 
-                const consulta = query(dbRef, where(documentId(dbRef), "==", id));
-                const data = await getDocs(consulta);
-                setProduct(data.docs.map(doc => (
+                const consulta = doc(dbRef, id);
+                const data = await getDoc(consulta);
+                setProduct(
                     {
-                        id: doc.id,
-                        ...doc.data()
+                        id: data.id,
+                        ...data.data()
                     }
-                )));
+                );
 
                 setLoading(false);
             } catch(err) {
@@ -51,7 +51,7 @@ export const ItemDetailContainer = () => {
                     <h5 className='text-center'>Loading...</h5>
                 </div>
             ) : (
-                <ItemDetail itemProduct={product[0]} />
+                <ItemDetail itemProduct={product} />
             ) }
         </section>
     )

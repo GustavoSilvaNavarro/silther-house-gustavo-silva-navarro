@@ -22,8 +22,10 @@ export const ItemListContainer = () => {
     useEffect(() => {
         const getProducts = async () => {
             try {
+                const productsRef = collection(db, 'allProducts');
+
                 if(categoryProduct) {
-                    const req = query(collection(db, 'allProducts'), where('category', "==", categoryProduct));
+                    const req = query(productsRef, where('category', "==", categoryProduct));
                     const datos = await getDocs(req);
                     setListProducts(datos.docs.map(doc => (
                         {
@@ -32,7 +34,7 @@ export const ItemListContainer = () => {
                         }
                     )));
                 } else {
-                    const dbData = await getDocs(collection(db, 'allProducts'));
+                    const dbData = await getDocs(productsRef);
                     setListProducts(dbData.docs.map(doc => (
                         {
                             id: doc.id,

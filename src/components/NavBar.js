@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { auth } from './firebase/firebase';
 import { AuthContext } from './context/AuthContext';
+import { OrderContext } from './context/CartContext';
 
 //IMPORTING COMPONENTS
 import { CartWidget } from './CartWidget';
@@ -12,12 +13,14 @@ import { CartWidget } from './CartWidget';
 //FUNCTIONS AND METHODS
 export const NavBar = () => {
     const { restartUserInfo } = useContext(AuthContext);
+    const { emptyCart } = useContext(OrderContext);
 
     const signout = async () => {
         try {
             await signOut(auth);
             localStorage.removeItem('token');
             restartUserInfo();
+            emptyCart();
         } catch(err) {
             console.log(err.code);
         };

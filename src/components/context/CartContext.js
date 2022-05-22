@@ -88,6 +88,14 @@ const CartContext = ({ children }) => {
     }
   };
 
+  //VACIAR CARRITO
+  const emptyCart = () => {
+    setOrdersCart([]);
+    setTotalPrice(0);
+    setTotalIva(0);
+    setTotalAmount(0);
+  };
+
   //RENDERING CONTEXT
   return (
     <OrderContext.Provider value={{
@@ -95,7 +103,8 @@ const CartContext = ({ children }) => {
       addProducts,
       deleteProduct,
       isInCart,
-      stockUpdated
+      stockUpdated,
+      emptyCart
     }}>
       {children}
     </OrderContext.Provider>

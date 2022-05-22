@@ -1,6 +1,6 @@
 //CALL MODULES
 import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { doc, addDoc, collection, Timestamp, updateDoc } from 'firebase/firestore';
 
@@ -15,8 +15,10 @@ import { CartProduct } from './CartProduct';
 
 //FUNCTIONS AND METHODS
 export const Cart = () => {
+    const navigate = useNavigate();
+
     //USE CONTEXT - FUNCTIONS AND VALUES
-    const { initialState } = useContext(OrderContext);
+    const { initialState, emptyCart } = useContext(OrderContext);
     const { initialStateUser } = useContext(AuthContext);
 
     //STATES
@@ -71,12 +73,16 @@ export const Cart = () => {
                     };
                     const ordenSet = await addDoc(collection(db, 'orders'), nuevaOrden);
 
+                    emptyCart();
+
                     Swal.fire({
                         text: `Muchas Gracias, su numero de compra es ${ordenSet.id}`,
                         icon: 'success',
                         showCancelButton: false,
                         showConfirmButton: false
                     });
+
+                    navigate('/orders');
                 } catch(err) {
                     console.log(err);
                 }
@@ -90,7 +96,7 @@ export const Cart = () => {
             <div className="row">
                 <h1 className='display-3 cartTitle'>Shopping Cart</h1>
 
-                {(orders.orders.length > 0) ? 
+                {(orders.orders.length > 0) ?
                     <>
                         <div className="col-md-9">
                             {orders.orders.map(orden => (

@@ -14,7 +14,7 @@ import { Footer } from './components/Footer';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { Cart } from './components/Cart';
 import { Login } from './components/Login';
-import { Order } from './components/Order';
+import { ListOrders } from './components/ListOrders';
 
 
 //FUNCTIONS AND METTHODS
@@ -50,7 +50,7 @@ function App() {
               } />
               <Route path='/orders' element={
                 <ProtectedRoutes>
-                  <Order />
+                  <ListOrders />
                 </ProtectedRoutes>
               } />
             </Routes>

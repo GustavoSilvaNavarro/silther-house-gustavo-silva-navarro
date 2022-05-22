@@ -1,5 +1,11 @@
-export const Order = () => {
+import { UniqueOrder } from './UniqueOrder';
+
+export const Order = ({ ordenes }) => {
   return (
-    <div>Order</div>
+    <div className='card-body'>
+        {ordenes.map(item => (
+            <UniqueOrder key={item.id} orden={item} />
+        ))}
+    </div>
   )
 };

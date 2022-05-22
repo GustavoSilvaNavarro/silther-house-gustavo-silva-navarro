@@ -1,11 +1,28 @@
 //CALL MODULES
+import { useContext } from 'react';
+import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+
+import { auth } from './firebase/firebase';
+import { AuthContext } from './context/AuthContext';
 
 //IMPORTING COMPONENTS
 import { CartWidget } from './CartWidget';
 
 //FUNCTIONS AND METHODS
 export const NavBar = () => {
+    const { restartUserInfo } = useContext(AuthContext);
+
+    const signout = async () => {
+        try {
+            await signOut(auth);
+            localStorage.removeItem('token');
+            restartUserInfo();
+        } catch(err) {
+            console.log(err.code);
+        };
+    };
+
     //RENDER THE COMPONENT
     return (
         <header className="travelHeader">
@@ -28,13 +45,14 @@ export const NavBar = () => {
                         <label htmlFor="burgerMenu__checkBtn" className="linksMenu__burgerMenu">
                             <i className="fas fa-bars"></i>
                         </label>
-        
+
                         <ul>
                             <li className="linksMenu__disappear"><Link to='/'>Home</Link></li>
-                            <li className="linksMenu__disappear"><a href="#">My Orders</a></li>
+                            <li className="linksMenu__disappear"><Link to='/orders'>My Orders</Link></li>
                             <li className="linksMenu__disappear"><Link to="/category/lunch">Lunch</Link></li>
                             <li className="linksMenu__disappear"><Link to="/category/dinner">Dinner</Link></li>
                             <li className="linksMenu__disappear"><Link to="/category/beverages">Beverages</Link></li>
+                            <li className={`linksMenu__disappear ${(!(localStorage.getItem('token'))) && 'cartIconContainer'}`}><Link to="/login" onClick={signout}>Sign Out</Link></li>
                             <CartWidget />
                         </ul>
                     </div>

@@ -20,7 +20,7 @@ export const CartProduct = ({ orden }) => {
                         <p className='m-0 fs-5 fw-bold'>USD ${orden.price}</p>
                         <div className='detailsContent__wrapper'>
                             <p className='detailsWrapper__category m-0 pe-5 fs-6'>{orden.category}</p>
-                            <p className={`m-0 fs-6 ${(orden.stock > 0) ? 'detailsWrapper__stockAvailable' : 'detailsWrapper__stockNotAvailable'}`}>Stock: {orden.stock}</p>
+                            <p className={`m-0 fs-6 ${(orden.stock > 0) ? 'detailsWrapper__stockAvailable' : 'detailsWrapper__stockNotAvailable'}`}>Stock Restante: {orden.stock}</p>
                         </div>
                         <p className='m-0 fs-5 fw-bold'>Cantidad Pedida: {orden.amount}</p>
                         <div className='d-flex align-items-center justify-content-between'>

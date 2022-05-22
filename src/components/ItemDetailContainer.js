@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 
 //IMPORTING COMPONENTS
 import { ItemDetail } from './ItemDetail';
@@ -47,9 +48,12 @@ export const ItemDetailContainer = () => {
     return (
         <section>
             { (loading) ? (
-                <div className='container'>
+                <section className='container'>
+                    <div className="d-flex justify-content-center">
+                        <BeatLoader color='#000' loading={loading} />
+                    </div>
                     <h5 className='text-center'>Loading...</h5>
-                </div>
+                </section>
             ) : (
                 <ItemDetail itemProduct={product} />
             ) }

@@ -12,14 +12,14 @@ import { ItemCount } from './ItemCount';
 
 //EXPORTING COMPONNET
 export const ItemDetail = ({ itemProduct }) => {
+    //USE CONTEXT - VALUES AND FUNCTIONS
+    const { addProducts, stockUpdated } = useContext(OrderContext);
+
     //STATES
-    const [contadorStock, setContadorStock] = useState(itemProduct?.stock);
+    const [contadorStock, setContadorStock] = useState(itemProduct?.stock-stockUpdated(itemProduct));
     const [dissapear, setDissapear] = useState(false);
     const [cantidadPedido, setCantidadPedido] = useState(0);
     const [valorInitial, setValorInitial] = useState('00');
-
-    //USE CONTEXT - VALUES AND FUNCTIONS
-    const { addProducts } = useContext(OrderContext);
 
     //FUNCTIONS
     //Modify stocks
@@ -47,7 +47,7 @@ export const ItemDetail = ({ itemProduct }) => {
     const restartOrder = () => {
         setCantidadPedido(0);
         setValorInitial('00');
-        setContadorStock(itemProduct.stock);
+        setContadorStock(itemProduct.stock-stockUpdated(itemProduct));
         setDissapear(false);
     };
 
@@ -78,7 +78,7 @@ export const ItemDetail = ({ itemProduct }) => {
                                 <div className='mt-5'>
                                     <div className="d-flex align-items-center justify-content-center">
                                         <button onClick={restartOrder} className='me-2 btn btn btn-outline-danger'>Cancelar</button>
-                                        <Link to='/cart'><button className='btn btn-outline-info' onClick={() => addProducts(itemProduct, cantidadPedido)}>Add Cart</button></Link>
+                                        <Link to='/cart'><button className='btn btn-outline-info' onClick={() => addProducts(itemProduct, cantidadPedido, contadorStock)}>Add Cart</button></Link>
                                         <button onClick={seguirComprando} className='ms-2 btn btn-outline-info'>Seguir Comprando</button>
                                     </div>
                                 </div> : <ItemCount ultimoPedido={cantidadPedido} stockProduct={contadorStock} initial={valorInitial} onAdd={onAdd} updateStock={updateStock} />

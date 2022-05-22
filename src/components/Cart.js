@@ -1,9 +1,14 @@
 //CALL MODULES
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { doc, addDoc, collection, Timestamp, updateDoc } from 'firebase/firestore';
 
 //IMPORTING CONTEXT
 import { OrderContext } from './context/CartContext';
+import { AuthContext } from './context/AuthContext';
+
+import { db } from './firebase/firebase';
 
 //IMPORTING COMPONENTS
 import { CartProduct } from './CartProduct';
@@ -12,6 +17,7 @@ import { CartProduct } from './CartProduct';
 export const Cart = () => {
     //USE CONTEXT - FUNCTIONS AND VALUES
     const { initialState } = useContext(OrderContext);
+    const { initialStateUser } = useContext(AuthContext);
 
     //STATES
     const [orders, setOrders] = useState(initialState);
@@ -21,6 +27,62 @@ export const Cart = () => {
     useEffect(() => {
         setOrders(initialState);
     }, [initialState]);
+
+    //FUNCTION
+    const setNewOrder = () => {
+        const {id, ...buyer} = initialStateUser.userDetails;
+        const {totalAmount, totalIva, totalPrice, ...listProducts} = orders;
+        let productsUpdatedStock = []
+        let newListProducts = [];
+        for(let i = 0; i < listProducts.orders.length; i++) {
+            const {exist, stock, ...newList} = listProducts.orders[i];
+            newListProducts.push(newList)
+        };
+
+        for(let i = 0; i < listProducts.orders.length; i++) {
+            const {amount, ...itemStockUpdated} = listProducts.orders[i];
+            productsUpdatedStock.push(itemStockUpdated)
+        };
+        
+        const nuevaOrden = {
+            idBuyer: id,
+            buyer,
+            newListProducts,
+            totalAmount,
+            totalIva,
+            totalPrice,
+            date: Timestamp.now().toDate().toString()
+        };
+
+        Swal.fire({
+            title: 'Comprar Order',
+            text: `Favor proceda a pagar el monto de ${totalPrice}`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#024',
+            cancelButtonColor: '#d63031',
+            confirmButtonText: 'Pay Order',
+            cancelButtonText: 'Cancel'
+        }).then(async result => {
+            if(result.isConfirmed) {
+                try {
+                    for(let i=0; i< productsUpdatedStock.length; i++) {
+                        await updateDoc(doc(db, 'allProducts', productsUpdatedStock[i].id), {stock: productsUpdatedStock[i].stock});
+                    };
+                    const ordenSet = await addDoc(collection(db, 'orders'), nuevaOrden);
+
+                    Swal.fire({
+                        text: `Muchas Gracias, su numero de compra es ${ordenSet.id}`,
+                        icon: 'success',
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                } catch(err) {
+                    console.log(err);
+                }
+            }
+        })
+    };
 
     //RENDERING COMPONENT
     return (
@@ -59,7 +121,7 @@ export const Cart = () => {
                                     </div>
                                 </div>
                                 <div className="d-grid mt-3 p-2">
-                                    <button className='btn btn-primary btn-lg text-center'>Pay Order</button>
+                                    <button className='btn btn-primary btn-lg text-center' onClick={setNewOrder}>Set Order</button>
                                 </div>
                             </div>
                         </div>

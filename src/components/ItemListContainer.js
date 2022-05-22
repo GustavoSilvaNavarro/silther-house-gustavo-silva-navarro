@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 
 //IMPORT COMPONENTS
 import { ItemList } from './ItemList';
@@ -57,6 +58,9 @@ export const ItemListContainer = () => {
         <main>
             {(cargando) ? (
                 <section className='mt-3'>
+                    <div className='d-flex justify-content-center'>
+                        <BeatLoader color='#000' loading={cargando} />
+                    </div>
                     <h5 className="text-center">Loading...</h5>
                 </section>
             ) : (

@@ -22,13 +22,14 @@ const CartContext = ({ children }) => {
 
   //FUNCTIONS
   //Add producst to my list
-  const addProducts = (itemAdded, cantidadPedida) => {
+  const addProducts = (itemAdded, cantidadPedida, stockRestante) => {
     const itemDuplicado = isInCart(itemAdded.id);
 
     if(itemDuplicado) {
       const resultado = initialState.orders.map(item => {
         if(item.id === itemAdded.id) {
-          item.amount += cantidadPedida
+          item.amount += cantidadPedida;
+          item.stock = stockRestante;
           return item;
         } else {
           return item;
@@ -40,6 +41,7 @@ const CartContext = ({ children }) => {
       setTotalIva(totalIva + (itemAdded.price * cantidadPedida * 0.21));
     } else {
       itemAdded.amount = cantidadPedida;
+      itemAdded.stock = stockRestante;
       setOrdersCart([...ordersCart, itemAdded]);
       setTotalAmount(totalAmount + cantidadPedida);
       setTotalPrice(totalPrice + (itemAdded.price * cantidadPedida));
@@ -76,13 +78,24 @@ const CartContext = ({ children }) => {
     };
   };
 
+  //Upate stock
+  const stockUpdated = (product) => {
+    const res = initialState.orders.find(producto => producto.id === product.id);
+    if(res) {
+      return res.amount;
+    } else {
+      return 0
+    }
+  };
+
   //RENDERING CONTEXT
   return (
     <OrderContext.Provider value={{
       initialState,
       addProducts,
       deleteProduct,
-      isInCart
+      isInCart,
+      stockUpdated
     }}>
       {children}
     </OrderContext.Provider>

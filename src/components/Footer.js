@@ -1,10 +1,8 @@
-//CALL MODULES
 import { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 import { AuthContext } from './context/AuthContext';
 
-//FUNCTIONS AND METHODS
 export const Footer = () => {
     const { initialStateUser } = useContext(AuthContext);
 
@@ -14,7 +12,6 @@ export const Footer = () => {
         setToken(initialStateUser.tokenAcceso);
     }, [initialStateUser]);
 
-    //RENDERING COMPONENT
     return (
         <footer>
             <img className="footer__Logo" src="https://res.cloudinary.com/dukuzakaw/image/upload/v1646938165/SkyLimitAirlinesWebSite/logo/travelLogo_irlvue.webp" alt="Logo" />

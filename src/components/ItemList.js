@@ -1,12 +1,8 @@
-//CALL MODULES
 import { Container, Grid } from '@mui/material';
 
-//IMPORTING COMPONENTS
 import { Item } from './Item';
 
-//EXPORT FUNCTION COMPONENT
 export const ItemList = ({ products, emptyProduct }) => {
-    //RENDERING COMPONENT
     return (
         <Container maxWidth="lg" className='mb-5 mt-3'>
             { products.length > 0 ? (

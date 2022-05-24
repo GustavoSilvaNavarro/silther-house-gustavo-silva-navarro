@@ -1,11 +1,9 @@
-//CALL MODULES AND METHODS
 import { createContext, useEffect, useState } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth, db } from '../firebase/firebase';
 
-//CREATING CONTEXT
 export const AuthContext = createContext();
 
 const UserContext = ({ children }) => {
@@ -14,7 +12,6 @@ const UserContext = ({ children }) => {
     const [tokenAcceso, setTokenAcceso] = useState('');
     const [authErrors, setAuthErrors] = useState('');
 
-    //INITIAL STATE
     const initialStateUser = {
         userDetails,
         usuarioActual,

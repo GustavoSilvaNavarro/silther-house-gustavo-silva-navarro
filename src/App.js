@@ -1,11 +1,8 @@
-//CALL MODULES
 import { Routes, Route } from 'react-router-dom';
 
-//IMPORTING CONTEXT
 import CartContext from './components/context/CartContext';
 import UserContext from './components/context/AuthContext';
 
-//IMPORTING COMPONENTS
 import { ProtectedRoutes } from './components/ProtectedRoutes';
 import { PrivateRoutes } from './components/PrivateRoutes';
 import { Register } from './components/Register';
@@ -18,11 +15,9 @@ import { Login } from './components/Login';
 import { ListOrders } from './components/ListOrders';
 import { useCurrentPage } from './components/hooks/useCurrentPage';
 
-//FUNCTIONS AND METTHODS
 function App() {
   const location = useCurrentPage();
 
-  //RENDER APP TO FRONTEND
   return (
     <UserContext>
       <CartContext>
@@ -70,5 +65,4 @@ function App() {
   );
 }
 
-//EXPORTING APP COMPONENT
 export default App;

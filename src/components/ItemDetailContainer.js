@@ -1,27 +1,19 @@
-//CALL MODULES
 import { useEffect, useState } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 
-//IMPORTING COMPONENTS
 import { ItemDetail } from './ItemDetail';
 
-//GET DATA
 import { db } from './firebase/firebase';
 
-//EXPORTING COMPONENTS
 export const ItemDetailContainer = () => {
-    //STATE
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
 
-    //Get Data
     const { id } = useParams();
 
-    //USEEFFECT SHOW DATA WHEN I LOAD (Piece of code wich runs based on a condition)
-    //Getting data from DB
     useEffect(() => {
         const getProductDetails = async () => {
             try {
@@ -46,14 +38,13 @@ export const ItemDetailContainer = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                });    
+                });
             };
         };
 
         getProductDetails();
     }, [id]);
 
-    //RENDERING COMPONENT
     return (
         <section>
             { (loading) ? (

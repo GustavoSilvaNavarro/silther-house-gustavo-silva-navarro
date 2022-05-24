@@ -1,28 +1,20 @@
-//CALL MODULES
 import { useState, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container, Typography, Box, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-//IMPORTING CONTEXT
 import { OrderContext } from './context/CartContext';
 
-//IMPORTING COMPONENTS
 import { ItemCount } from './ItemCount';
 
-//EXPORTING COMPONNET
 export const ItemDetail = ({ itemProduct }) => {
-    //USE CONTEXT - VALUES AND FUNCTIONS
     const { addProducts, stockUpdated } = useContext(OrderContext);
 
-    //STATES
     const [contadorStock, setContadorStock] = useState(itemProduct?.stock-stockUpdated(itemProduct));
     const [dissapear, setDissapear] = useState(false);
     const [cantidadPedido, setCantidadPedido] = useState(0);
     const [valorInitial, setValorInitial] = useState('00');
 
-    //FUNCTIONS
-    //Modify stocks
     const updateStock = (stockActualizado) => {
         setContadorStock(stockActualizado);
     };
@@ -57,7 +49,6 @@ export const ItemDetail = ({ itemProduct }) => {
         setValorInitial(valorInicial);
     };
 
-    //RENDERING COMPONENT
     return (
         <Container>
             <Typography align='center' variant='h2'>{itemProduct.name}</Typography>

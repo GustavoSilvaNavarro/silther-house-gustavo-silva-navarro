@@ -1,5 +1,3 @@
-//FIREBASE SETTINGS KEYS CONNECTION
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyDZF9GwuM3CvjtabPfCX5qjPDJwnATXUbE",
     authDomain: "ecomm-siltherhouse-gsn.firebaseapp.com",
@@ -10,5 +8,4 @@ const firebaseConfig = {
     measurementId: "G-PTXWPHBGKB"
 };
 
-//EXPORTING SETTINGS
 export default firebaseConfig;

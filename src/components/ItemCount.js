@@ -1,16 +1,12 @@
-//CALL MODULES
 import { useState } from 'react';
 import { Remove, Add } from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
 
-//FUNCTIONS AND METHODS
 export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateStock }) => {
-    //STATES
     const [stockAvailable, setStockAvailable] = useState(stockProduct);
     const [countProduct, setCountProduct] = useState(initial);
     const [cantidadPedida, setCantidadPedida] = useState(ultimoPedido);
 
-    //FUNCTIONS
     const addOneProduct = () => {
         if(stockAvailable > 0) {
             let newNumber = parseInt(countProduct);
@@ -32,7 +28,7 @@ export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateSt
             });
         }
     };
-//onAdd(numberAdded);
+
     const removeOneProduct = () => {
         if(parseInt(countProduct) > 0) {
             let newNumber = parseInt(countProduct);
@@ -55,7 +51,6 @@ export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateSt
         };
     };
 
-    //RENDERING COMPONENT
     return (
         <div className='addCartProducts'>
             <div className="cartProducts__container">

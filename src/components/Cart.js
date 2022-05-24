@@ -1,37 +1,28 @@
-//CALL MODULES
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import { doc, addDoc, collection, Timestamp, updateDoc } from 'firebase/firestore';
 
-//IMPORTING CONTEXT
 import { OrderContext } from './context/CartContext';
 import { AuthContext } from './context/AuthContext';
 
 import { db } from './firebase/firebase';
 
-//IMPORTING COMPONENTS
 import { CartProduct } from './CartProduct';
 
-//FUNCTIONS AND METHODS
 export const Cart = () => {
     const navigate = useNavigate();
 
-    //USE CONTEXT - FUNCTIONS AND VALUES
     const { initialState, emptyCart } = useContext(OrderContext);
     const { initialStateUser } = useContext(AuthContext);
 
-    //STATES
     const [orders, setOrders] = useState(initialState);
 
-    //USEEFFECT SHOW DATA WHEN I LOAD (Piece of code wich runs based on a condition)
-    //Getting data from context
     useEffect(() => {
         setOrders(initialState);
     }, [initialState]);
 
-    //FUNCTION
     const setNewOrder = () => {
         const {id, ...buyer} = initialStateUser.userDetails;
         const {totalAmount, totalIva, totalPrice, ...listProducts} = orders;
@@ -100,7 +91,6 @@ export const Cart = () => {
         });
     };
 
-    //RENDERING COMPONENT
     return (
         <div className='cartContainer mb-5'>
             <div className="row">

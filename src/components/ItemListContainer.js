@@ -1,26 +1,19 @@
-//CALL MODULES
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 
-//IMPORT COMPONENTS
 import { ItemList } from './ItemList';
 
-//Geting DB
 import { db } from './firebase/firebase';
 
-//FUNCTIONS AND METHODS
 export const ItemListContainer = () => {
-    //STATE
     const [listProducts, setListProducts] = useState([]);
     const [cargando, setCargando] = useState(true);
 
     const { categoryProduct } = useParams();
 
-    //USEEFFECT SHOW DATA WHEN I LOAD (Piece of code wich runs based on a condition)
-    //Getting data from DB
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -62,7 +55,6 @@ export const ItemListContainer = () => {
         getProducts();
     }, [categoryProduct]);
 
-    //RENDERING COMPONENT
     return (
         <main>
             {(cargando) ? (

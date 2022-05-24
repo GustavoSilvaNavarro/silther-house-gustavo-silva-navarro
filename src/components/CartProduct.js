@@ -1,15 +1,10 @@
-//CALL MODULES AND METHODS
 import { useContext } from 'react';
 
-//IMPORTING CONTEXT
 import { OrderContext } from './context/CartContext';
 
-//FUNCTIONS AND METHODS
 export const CartProduct = ({ orden }) => {
-    //USE CONTEXT - FUNCTIONS AND VALUES
     const { deleteProduct } = useContext(OrderContext);
 
-    //RENDERING COMPONENT
     return (
         <div className="card mb-3">
             <div className="card-body">

@@ -1,4 +1,3 @@
-//CALL MODULES
 import { useContext } from 'react';
 import { signOut } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,10 +7,8 @@ import { auth } from './firebase/firebase';
 import { AuthContext } from './context/AuthContext';
 import { OrderContext } from './context/CartContext';
 
-//IMPORTING COMPONENTS
 import { CartWidget } from './CartWidget';
 
-//FUNCTIONS AND METHODS
 export const NavBar = () => {
     const { restartUserInfo } = useContext(AuthContext);
     const { emptyCart } = useContext(OrderContext);
@@ -35,10 +32,8 @@ export const NavBar = () => {
         };
     };
 
-    //RENDER THE COMPONENT
     return (
         <header className="travelHeader">
-            {/* NAVBAR */}
             <div className="travelHeader__navBar">
                 <nav className="headerNavBar__design">
                     <NavLink to='/' className="headerNavBar__link">

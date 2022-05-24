@@ -1,18 +1,13 @@
-//CALL MODULES AND HOOKS
 import { createContext, useState } from 'react';
 
-//CREATING CONTEXT
 export const OrderContext = createContext();
 
-//FUNCTIONS AND METHODS
 const CartContext = ({ children }) => {
-  //STATES
   const [ordersCart, setOrdersCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalIva, setTotalIva] = useState(0);
 
-  //CART STATE
   const initialState = {
     orders: ordersCart,
     totalAmount,
@@ -20,8 +15,6 @@ const CartContext = ({ children }) => {
     totalIva
   };
 
-  //FUNCTIONS
-  //Add producst to my list
   const addProducts = (itemAdded, cantidadPedida, stockRestante) => {
     const itemDuplicado = isInCart(itemAdded.id);
 
@@ -49,7 +42,6 @@ const CartContext = ({ children }) => {
     };
   };
 
-  //DELETE PRODUCT
   const deleteProduct = id => {
     const rest = initialState.orders.filter(product => product.id !== id);
     let precioTot = 0;
@@ -68,7 +60,6 @@ const CartContext = ({ children }) => {
     setTotalIva(ivaTot)
   };
 
-  //Check the product is inside cart
   const isInCart = id => {
     const duplicados = initialState.orders.filter(item => item.id === id);
     if(duplicados.length > 0) {
@@ -78,7 +69,6 @@ const CartContext = ({ children }) => {
     };
   };
 
-  //Upate stock
   const stockUpdated = (product) => {
     const res = initialState.orders.find(producto => producto.id === product.id);
     if(res) {
@@ -88,7 +78,6 @@ const CartContext = ({ children }) => {
     }
   };
 
-  //VACIAR CARRITO
   const emptyCart = () => {
     setOrdersCart([]);
     setTotalPrice(0);
@@ -96,7 +85,6 @@ const CartContext = ({ children }) => {
     setTotalAmount(0);
   };
 
-  //RENDERING CONTEXT
   return (
     <OrderContext.Provider value={{
       initialState,
@@ -111,5 +99,4 @@ const CartContext = ({ children }) => {
   )
 };
 
-//EXPORTING CONTEXT
 export default CartContext;

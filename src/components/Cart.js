@@ -2,6 +2,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
 import { doc, addDoc, collection, Timestamp, updateDoc } from 'firebase/firestore';
 
 //IMPORTING CONTEXT
@@ -71,6 +72,7 @@ export const Cart = () => {
                     for(let i=0; i< productsUpdatedStock.length; i++) {
                         await updateDoc(doc(db, 'allProducts', productsUpdatedStock[i].id), {stock: productsUpdatedStock[i].stock});
                     };
+
                     const ordenSet = await addDoc(collection(db, 'orders'), nuevaOrden);
 
                     emptyCart();
@@ -84,10 +86,18 @@ export const Cart = () => {
 
                     navigate('/orders');
                 } catch(err) {
-                    console.log(err);
-                }
-            }
-        })
+                    toast.info('Error al pagar la orden', {
+                        position: "top-right",
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                };
+            };
+        });
     };
 
     //RENDERING COMPONENT
@@ -137,6 +147,17 @@ export const Cart = () => {
                     </div>
                 }
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 };

@@ -12,12 +12,14 @@ const UserContext = ({ children }) => {
     const [usuarioActual, setUsuarioActual] = useState(null);
     const [userDetails, setUserDetails] = useState({});
     const [tokenAcceso, setTokenAcceso] = useState('');
+    const [authErrors, setAuthErrors] = useState('');
 
     //INITIAL STATE
     const initialStateUser = {
         userDetails,
         usuarioActual,
-        tokenAcceso
+        tokenAcceso,
+        authErrors
     };
 
     useEffect(() => {
@@ -41,7 +43,9 @@ const UserContext = ({ children }) => {
                     }
                 );
             } catch(err) {
-                console.log(err.code);
+                if(!err.code) {
+                    setAuthErrors('Favor registrese o inicie sesion');
+                };
             };
         });
     }, []);

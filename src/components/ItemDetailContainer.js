@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 
 //IMPORTING COMPONENTS
 import { ItemDetail } from './ItemDetail';
@@ -37,7 +38,15 @@ export const ItemDetailContainer = () => {
 
                 setLoading(false);
             } catch(err) {
-                console.log('Error al consultar el dato', err);
+                toast.error('Error al consultar el dato', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });    
             };
         };
 
@@ -57,6 +66,17 @@ export const ItemDetailContainer = () => {
             ) : (
                 <ItemDetail itemProduct={product} />
             ) }
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </section>
     )
 };

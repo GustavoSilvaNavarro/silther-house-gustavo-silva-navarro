@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 
 //IMPORT COMPONENTS
 import { ItemList } from './ItemList';
@@ -44,9 +45,17 @@ export const ItemListContainer = () => {
                     )));
                 };
 
-                setCargando(false);    
+                setCargando(false);
             } catch(err) {
-                console.log('Lo sentimos no pudimos obtener los datos', err);
+                toast.error('Lo sentimos no pudimos obtener los datos', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });    
             };
         };
 
@@ -68,6 +77,17 @@ export const ItemListContainer = () => {
                     <ItemList products={listProducts} emptyProduct="No se cuentan con Productos" />
                 </section>
             ) }
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </main>
     )
 };

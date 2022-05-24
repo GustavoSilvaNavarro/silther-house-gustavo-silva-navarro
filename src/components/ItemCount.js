@@ -1,6 +1,7 @@
 //CALL MODULES
 import { useState } from 'react';
 import { Remove, Add } from '@mui/icons-material';
+import { ToastContainer, toast } from 'react-toastify';
 
 //FUNCTIONS AND METHODS
 export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateStock }) => {
@@ -20,7 +21,15 @@ export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateSt
 
             updateStock(stockAvailable-1);
         } else {
-            console.log('Stock no disponible');
+            toast.error('Stock no disponible', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 //onAdd(numberAdded);
@@ -34,7 +43,15 @@ export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateSt
 
             updateStock(stockAvailable+1);
         } else {
-            console.log('No puede agregar valores negativos');
+            toast.error('No puede agregar valores negativos', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         };
     };
 
@@ -51,6 +68,17 @@ export const ItemCount = ({ ultimoPedido, stockProduct, initial, onAdd, updateSt
                     <button type='button' onClick={() => onAdd(cantidadPedida, true)} className='btn btn-outline-info'>Add</button>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 };

@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
 
+import { AuthContext } from './context/AuthContext';
+
 import { auth, db } from './firebase/firebase';
 
 export const Register = () => {
     const navigate = useNavigate();
+
+    const { initialStateUser } = useContext(AuthContext);
 
     const [newUser, setNewUser] = useState({
         nameUser: '',
@@ -16,6 +20,20 @@ export const Register = () => {
         celUser: '',
         addressUser: ''
     });
+
+    useEffect(() => {
+        if(initialStateUser.authErrors !== '') {
+            toast.info(initialStateUser.authErrors, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }, [initialStateUser.authErrors]);
 
     const formChange = e => {
         setNewUser({...newUser, [e.target.name]: e.target.value});
@@ -43,7 +61,7 @@ export const Register = () => {
     };
 
     return (
-        <main>
+        <main className='p-3'>
             <h1 className="text-center display-2 navyColor">Bienvenido a Silther House, favor registrarse para poder comprar en nuestra tienda virtual</h1>
             <section className="container my-4">
                 <div className="row justify-content-center">

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from './context/AuthContext';
@@ -30,7 +31,15 @@ export const ListOrders = () => {
 
         setLoadingData(false);
       } catch(err) {
-        console.log(err);
+        toast.error('Error al obtener las ordenes', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     };
 
@@ -97,6 +106,17 @@ export const ListOrders = () => {
           )}
         </>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </main>
   )
 };

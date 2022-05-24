@@ -1,18 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { auth } from './firebase/firebase';
+import { AuthContext } from './context/AuthContext';
 
+import { auth } from './firebase/firebase';
 
 export const Login = () => {
     const navigate = useNavigate();
+
+    const { initialStateUser } = useContext(AuthContext);
 
     const [newUsuario, setNewUsuario] = useState({
         emailUser: '',
         passwordUser: ''
     });
+
+    useEffect(() => {
+        if(initialStateUser.authErrors !== '') {
+            toast.info(initialStateUser.authErrors, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }, [initialStateUser.authErrors]);
 
     const formChange = e => {
         setNewUsuario({...newUsuario, [e.target.name]: e.target.value});
